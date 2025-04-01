@@ -1,9 +1,30 @@
 dependencyResolutionConfig:
-    analyzeBOM: org.apache.camel:camel-parent:3.20.1.redhat-00012
+    analyzeBOM: org.apache.camel:camel-parent:4.4.0.redhat-00010
     includeOptionalDependencies: true
     includeArtifacts:
-        - dummy:dummy:*
+        - org.apache.camel:*:*
+        - org.apache.cxf:*:*
+    recipeRepos:
+        - https://github.com/redhat-appstudio/jvm-build-data
+        - https://github.com/jboss-fuse/camel-spring-boot-depstobuild
     excludeArtifacts:
+        - org.apache:apache:*
+        # Skip jboss-parent
+        - org.jboss:jboss-parent:*
+        # Skip testcontainers
+        - org.testcontainers:*:*
+        # Large repositories
+        - org.graalvm.js:*:*
+        - com.google.android-annotations:*:*
+        - com.googlecode.json-simple:*:*
+        - org.camunda.bpm:camunda-bom:*
+        - org.ogce:xpp3:*
+        - org.fusesource:fusesource:*
+        - org.fusesource.hawtbuf:*:*
+        - org.tukaani:xz
+        # Skip fusesource maven plugins - maven plugins seem unnecessary to productize
+        - org.fusesource.mvnplugins:*:* 
+        # Skip springframework
         - org.springframework:*:*
         - org.springframework.amqp:*:*
         - org.springframework.batch:*:*
@@ -51,6 +72,16 @@ dependencyResolutionConfig:
         - org.sonatype.plexus:plexus-cipher:*
         # grpc
         - io.grpc:*:*
+        # Skip atlassian poms and manage that manually
+        - com.atlassian.pom:*:*
+        - com.atlassian:*:*
+        - com.atlassian.event:*:*
+        - com.atlassian.httpclient:*:*
+        - com.atlassian.jira:*:*
+        - com.atlassian.platform:*:*
+        - com.atlassian.sal:*:*
+        - io.atlassian.fugue:*:*
+        - io.atlassian.util.concurrent:*:*
         # vertx build by other groups
         - io.vertx:*:*
         # camel
@@ -62,7 +93,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-jetty:*
         - org.apache.camel:camel-undertow:*
         - org.apache.camel:camel-service:*
-        - org.apache.camel:camel-activemq:*
         - org.apache.camel:camel-any23:*
         - org.apache.camel:camel-arangodb:*
         - org.apache.camel:camel-as2:*
@@ -94,7 +124,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-corda:*
         - org.apache.camel:camel-couchbase:*
         - org.apache.camel:camel-couchdb:*
-        - org.apache.camel:camel-crypto:*
         - org.apache.camel:camel-csimple-joor:*
         - org.apache.camel:camel-csv:*
         - org.apache.camel:camel-datasonnet:*
@@ -128,7 +157,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-grape:*
         - org.apache.camel:camel-graphql:*
         - org.apache.camel:camel-grok:*
-        - org.apache.camel:camel-grpc:*
         - org.apache.camel:camel-guava-eventbus:*
         - org.apache.camel:camel-hashicorp-vault:*
         - org.apache.camel:camel-hazelcast:*
@@ -151,7 +179,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-jcache:*
         - org.apache.camel:camel-jclouds:*
         - org.apache.camel:camel-jcr:*
-        - org.apache.camel:camel-jdbc:*
         - org.apache.camel:camel-jgroups-raft:*
         - org.apache.camel:camel-jgroups:*
         - org.apache.camel:camel-jmx:*
@@ -167,7 +194,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-json-patch:*
         - org.apache.camel:camel-jt400:*
         - org.apache.camel:camel-kudu:*
-        - org.apache.camel:camel-ldap:*
         - org.apache.camel:camel-ldif:*
         - org.apache.camel:camel-leveldb:*
         - org.apache.camel:camel-lra:*
@@ -175,19 +201,15 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-lumberjack:*
         - org.apache.camel:camel-lzf:*
         - org.apache.camel:camel-metrics:*
-        - org.apache.camel:camel-micrometer:*
         - org.apache.camel:camel-milo:*
         - org.apache.camel:camel-mina:*
         - org.apache.camel:camel-mongodb-gridfs:*
         - org.apache.camel:camel-mustache:*
         - org.apache.camel:camel-mvel:*
         - org.apache.camel:camel-mybatis:*
-        - org.apache.camel:camel-netty-http:*
         - org.apache.camel:camel-nitrite:*
         - org.apache.camel:camel-oaipmh:*
         - org.apache.camel:camel-ognl:*
-        - org.apache.camel:camel-olingo2:*
-        - org.apache.camel:camel-olingo4:*
         - org.apache.camel:camel-openstack:*
         - org.apache.camel:camel-opentracing:*
         - org.apache.camel:camel-optaplanner:*
@@ -224,8 +246,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-snmp:*
         - org.apache.camel:camel-solr:*
         - org.apache.camel:camel-spark:*
-        - org.apache.camel:camel-splunk:*
-        - org.apache.camel:camel-splunk-hec:*
         - org.apache.camel:camel-spring-batch:*
         - org.apache.camel:camel-spring-integration:*
         - org.apache.camel:camel-spring-jdbc:*
@@ -264,7 +284,6 @@ dependencyResolutionConfig:
         - org.apache.camel:camel-xj:*
         - org.apache.camel:camel-xmlsecurity:*
         - org.apache.camel:camel-xmpp:*
-        - org.apache.camel:camel-xslt-saxon:*
         - org.apache.camel:camel-xstream:*
         - org.apache.camel:camel-zendesk:*
         - org.apache.camel:camel-zipkin:*
@@ -276,6 +295,7 @@ dependencyResolutionConfig:
 buildConfigGeneratorConfig:
     defaultValues:
         environmentName: "OpenJDK 11.0; Mvn 3.5.4"
+        buildScript: "mvn -DskipTests clean generate-sources deploy" 
     failGeneratedBuildScript: false
     scmReplaceWithPlaceholder:
         - "forge.fusesource.com/mvnplugins.git"
@@ -315,8 +335,8 @@ buildConfigGeneratorConfig:
             abbreviation: ceq-third-party
             stage: GA
             issueTrackerUrl: https://issues.redhat.com/projects/CEQ
-        version: 2.13.0
-        milestone: CQ1
+        version: 3.0.0
+        milestone: CS2
         group: Camel Extensions for Quarkus Third Party Components
         builds:
             -
